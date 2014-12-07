@@ -1,0 +1,16 @@
+{
+    "name": "y-uti/php-op-checker",
+    "license": "MIT",
+    "authors": [
+	{
+	    "name": "Yuji Uchiyama",
+	    "email": "y.uchiyama.1015@gmail.com"
+	}
+    ],
+
+    "autoload": {
+	"psr-4": {
+	    "YUti\\OpChecker\\": "src/"
+	}
+    }
+}
