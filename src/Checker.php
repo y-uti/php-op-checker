@@ -3,8 +3,11 @@ namespace YUti\OpChecker;
 
 class Checker
 {
+    private $operatorRepository;
+
     public function __construct()
     {
+        $this->operatorRepository = OperatorRepository::newInstance();
     }
 
     private function buildValues()
@@ -72,27 +75,28 @@ class Checker
         return $values;
     }
 
-    private function addType($key, $values, &$acc)
+    private function addType($key, array $values, &$acc)
     {
         foreach ($values as $k => $v) {
             $acc["$key.$k"] = $v;
         }
     }
 
-    private function compareValues($operator, $values1, $values2)
+    private function compareValues(Operator $operator, array $values1, array $values2)
     {
         $results = array();
         foreach ($values1 as $k1 => $v1) {
             foreach ($values2 as $k2 => $v2) {
-                $results["$k1,$k2"] = $operator($v1, $v2) ? 'true' : 'false';
+                $results["$k1,$k2"] = $operator->applyTo(array($v1, $v2));
             }
         }
 
         return $results;
     }
 
-    private function compareAndDump($opSymbol, $operator, $values1, $values2)
+    private function compareAndDump(Operator $operator, array $values1, array $values2)
     {
+        $opSymbol = $operator->getSymbol();
         $results = $this->compareValues($operator, $values1, $values2);
         foreach ($results as $k => $v) {
             list ($lhs, $rhs) = explode(',', $k);
@@ -100,17 +104,22 @@ class Checker
         }
     }
 
-    public function check($argv)
+    private function getOperator($symbol)
+    {
+        return $this->operatorRepository->get($symbol);
+    }
+
+    public function check(array $argv)
     {
         $values = $this->buildValues();
-        $opEqual = function ($v1, $v2) { return $v1 == $v2; };
+        $operator = $this->getOperator($argv[1]);
 
-        if (count($argv) == 3) {
-            $values1 = array_filter($values, function ($k) use ($argv) { return explode('.', $k)[0] === $argv[1]; }, ARRAY_FILTER_USE_KEY);
-            $values2 = array_filter($values, function ($k) use ($argv) { return explode('.', $k)[0] === $argv[2]; }, ARRAY_FILTER_USE_KEY);
-            $this->compareAndDump('==', $opEqual, $values1, $values2);
+        if (count($argv) == 4) {
+            $values1 = array_filter($values, function ($k) use ($argv) { return explode('.', $k)[0] === $argv[2]; }, ARRAY_FILTER_USE_KEY);
+            $values2 = array_filter($values, function ($k) use ($argv) { return explode('.', $k)[0] === $argv[3]; }, ARRAY_FILTER_USE_KEY);
+            $this->compareAndDump($operator, $values1, $values2);
         } else {
-            $this->compareAndDump('==', $opEqual, $values, $values);
+            $this->compareAndDump($operator, $values, $values);
         }
     }
 }
