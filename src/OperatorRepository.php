@@ -46,7 +46,7 @@ class OperatorRepository
         return $repository;
     }
 
-    public function __construct()
+    private function __construct()
     {
         $this->repository = array();
     }
