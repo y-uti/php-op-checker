@@ -3,26 +3,19 @@ namespace YUti\OpChecker;
 
 class Value
 {
-    private $name;
     private $value;
 
-    public function __construct($name, $value)
+    public function __construct($value)
     {
-        $this->name = $name;
         $this->value = $value;
     }
 
-    public function name()
-    {
-        return $this->name;
-    }
-
-    public function get()
+    public function __invoke()
     {
         return $this->value;
     }
 
-    public function type()
+    public function getType()
     {
         return TypeUtil::normalize(gettype($this->value));
     }

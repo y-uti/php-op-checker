@@ -12,6 +12,11 @@ class Operator
         $this->function = $function;
     }
 
+    public function __invoke(array $operands)
+    {
+        return call_user_func_array($this->function, $operands);
+    }
+
     public function getSymbol()
     {
         return $this->symbol;
@@ -20,10 +25,5 @@ class Operator
     public function getFunction()
     {
         return $this->function;
-    }
-
-    public function applyTo(array $operands)
-    {
-        return call_user_func_array($this->function, $operands);
     }
 }

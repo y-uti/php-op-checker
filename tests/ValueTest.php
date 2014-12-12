@@ -3,15 +3,15 @@ namespace YUti\OpChecker;
 
 class ValueTest extends \PHPUnit_Framework_TestCase
 {
-    public function testGet()
+    public function testInvoke()
     {
         $value = new Value(1);
-        $this->assertEquals(1, $value->get());
+        $this->assertEquals(1, $value());
     }
 
-    public function testType()
+    public function testGetType()
     {
         $value = new Value(1);
-        $this->assertEquals('integer', $value->type());
+        $this->assertEquals('integer', $value->getType());
     }
 }

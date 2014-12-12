@@ -32,10 +32,10 @@ class ValueRepository
         return false;
     }
 
-    public function put(Value $value)
+    public function put(NamedValue $value)
     {
-        if ($type = $value->type()) {
-            $this->repository[$type][$value->name()] = $value;
+        if ($type = $value->getType()) {
+            $this->repository[$type][$value->getName()] = $value;
         }
 
         return $this;

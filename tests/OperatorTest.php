@@ -3,11 +3,11 @@ namespace YUti\OpChecker;
 
 class OperatorTest extends \PHPUnit_Framework_TestCase
 {
-    public function testApplyTo()
+    public function testInvoke()
     {
         $operator = new Operator('==', function ($a, $b) { return $a == $b; });
 
-        $this->assertTrue($operator->applyTo(array(1, 1)));
-        $this->assertFalse($operator->applyTo(array(1, 2)));
+        $this->assertTrue($operator(array(1, 1)));
+        $this->assertFalse($operator(array(1, 2)));
     }
 }
