@@ -69,7 +69,7 @@ class Checker
 
     public function check(array $argv)
     {
-        $values = $this->buildValues();
+        $this->buildValues();
         $operator = $this->getOperator($argv[1]);
 
         $setOfTypes = array();

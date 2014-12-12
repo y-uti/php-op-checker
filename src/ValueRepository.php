@@ -5,17 +5,17 @@ class ValueRepository
 {
     private $repository;
 
-    private static function initialize(ValueRepository $repository)
+    private static function initialize(ValueRepository $instance)
     {
-        $repository = array_fill_keys(TypeUtil::types(), array());
+        $instance->repository = array_fill_keys(TypeUtil::types(), array());
     }
 
     public static function newInstance()
     {
-        $repository = new ValueRepository;
-        self::initialize($repository);
+        $instance = new ValueRepository;
+        self::initialize($instance);
 
-        return $repository;
+        return $instance;
     }
 
     private function __construct()
