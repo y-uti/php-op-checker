@@ -53,7 +53,11 @@ class OperatorRepository
 
     public function get($symbol)
     {
-        return $this->repository[$symbol];
+        if (array_key_exists($symbol, $this->repository)) {
+            return $this->repository[$symbol];
+        } else {
+            return false;
+        }
     }
 
     public function put(Operator $operator)

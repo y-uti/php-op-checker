@@ -3,6 +3,22 @@ namespace YUti\OpChecker;
 
 class TypeUtilTest extends \PHPUnit_Framework_TestCase
 {
+    public function testTypes()
+    {
+        $expected = array(
+            'array',
+            'boolean',
+            'float',
+            'integer',
+            'null',
+            'object',
+            'resource',
+            'string',
+        );
+
+        $this->assertEquals($expected, TypeUtil::types());
+    }
+
     public function testNormalizeIdent()
     {
         $type = "string";
