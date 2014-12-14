@@ -43,6 +43,7 @@ class OperatorRepository
         if ($withBuiltinOperators) {
             self::setBuiltinOperators($repository);
         }
+
         return $repository;
     }
 
@@ -55,14 +56,15 @@ class OperatorRepository
     {
         if (array_key_exists($symbol, $this->repository)) {
             return $this->repository[$symbol];
-        } else {
-            return false;
         }
+
+        return false;
     }
 
     public function put(Operator $operator)
     {
         $this->repository[$operator->getSymbol()] = $operator;
+
         return $this;
     }
 }

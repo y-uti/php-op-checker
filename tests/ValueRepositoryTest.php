@@ -6,6 +6,7 @@ class ValueRepositoryTest extends \PHPUnit_Framework_TestCase
     public function testNewInstance()
     {
         $instance = ValueRepository::newInstance();
+
         $this->assertTrue($instance instanceof ValueRepository);
     }
 
@@ -13,6 +14,7 @@ class ValueRepositoryTest extends \PHPUnit_Framework_TestCase
     {
         $instance = ValueRepository::newInstance();
         $values = $instance->getByType('integer');
+
         $this->assertEquals(array(), $values);
     }
 
@@ -20,6 +22,7 @@ class ValueRepositoryTest extends \PHPUnit_Framework_TestCase
     {
         $instance = ValueRepository::newInstance();
         $values = $instance->getByType('xyz');
+
         $this->assertEquals(false, $values);
     }
 
@@ -38,6 +41,7 @@ class ValueRepositoryTest extends \PHPUnit_Framework_TestCase
         $expectedFloat = array(
             'float0' => new NamedValue('float0', 0.0),
         );
+
         $this->assertEquals($expectedInt, $instance->getByType('integer'));
         $this->assertEquals($expectedFloat, $instance->getByType('float'));
     }

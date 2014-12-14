@@ -29,14 +29,8 @@ class OperatorRepositoryTest extends \PHPUnit_Framework_TestCase
     {
         $instance = OperatorRepository::newInstance(false);
         $instance->put(new Operator('!', function ($a) { return !$a; }));
-
         $operator = $instance->get('!');
 
         $this->assertEquals(false, $operator(array(true)));
-    }
-
-
-    public function test()
-    {
     }
 }

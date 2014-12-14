@@ -18,6 +18,7 @@ class ArrayUtilTest extends \PHPUnit_Framework_TestCase
         $arrays = array();
         $expected = array();
         $actual = ArrayUtil::cartesianProduct($arrays);
+
         $this->assertEquals($expected, $this->toArray($actual));
     }
 
@@ -32,6 +33,7 @@ class ArrayUtilTest extends \PHPUnit_Framework_TestCase
             array(3),
         );
         $actual = ArrayUtil::cartesianProduct($arrays);
+
         $this->assertEquals($expected, $this->toArray($actual));
     }
 
@@ -51,6 +53,7 @@ class ArrayUtilTest extends \PHPUnit_Framework_TestCase
             array(3, 4, 6),
         );
         $actual = ArrayUtil::cartesianProduct($arrays);
+
         $this->assertEquals($expected, $this->toArray($actual));
     }
 
@@ -63,6 +66,7 @@ class ArrayUtilTest extends \PHPUnit_Framework_TestCase
         );
         $expected = array();
         $actual = ArrayUtil::cartesianProduct($arrays);
+
         $this->assertEquals($expected, $this->toArray($actual));
     }
 }
