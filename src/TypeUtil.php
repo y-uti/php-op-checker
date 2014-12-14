@@ -21,7 +21,11 @@ class TypeUtil
 
     public static function normalize($type)
     {
-        return self::findByKey(self::getKey($type));
+        if ($key = self::getKey($type)) {
+            return self::findByKey($key);
+        }
+
+        return false;
     }
 
     private static function getKey($type)
@@ -29,6 +33,7 @@ class TypeUtil
         if ($trimmed = trim($type)) {
             return strtolower($trimmed[0]);
         }
+
         return false;
     }
 
