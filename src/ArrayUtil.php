@@ -5,7 +5,11 @@ class ArrayUtil
 {
     public static function cartesianProduct(array $arrays)
     {
-        return !$arrays ? array() : self::cartesianProduct_rec($arrays);
+        if ($arrays) {
+            return self::cartesianProduct_rec($arrays);
+        } else {
+            return new \EmptyIterator();
+        }
     }
 
     private static function cartesianProduct_rec(array $arrays)

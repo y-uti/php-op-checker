@@ -3,10 +3,10 @@ namespace YUti\OpChecker;
 
 class ArrayUtilTest extends \PHPUnit_Framework_TestCase
 {
-    private function toArray($arrayOrGenerator)
+    private function toArray(\Traversable $traversable)
     {
         $array = array();
-        foreach ($arrayOrGenerator as $v) {
+        foreach ($traversable as $v) {
             $array[] = $v;
         }
 
