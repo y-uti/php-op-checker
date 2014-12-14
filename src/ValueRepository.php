@@ -12,7 +12,7 @@ class ValueRepository
 
     public static function newInstance()
     {
-        $instance = new ValueRepository;
+        $instance = new ValueRepository();
         self::initialize($instance);
 
         return $instance;
