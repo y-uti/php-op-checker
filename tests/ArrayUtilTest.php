@@ -16,7 +16,9 @@ class ArrayUtilTest extends \PHPUnit_Framework_TestCase
     public function testCartesianProduct_empty()
     {
         $arrays = array();
-        $expected = array();
+        $expected = array(
+            array(),
+        );
         $actual = ArrayUtil::cartesianProduct($arrays);
 
         $this->assertEquals($expected, $this->toArray($actual));
