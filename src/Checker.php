@@ -5,11 +5,13 @@ class Checker
 {
     private $operatorRepository;
     private $valueRepository;
+    private $writer;
 
     public function __construct()
     {
         $this->operatorRepository = OperatorRepository::newInstance();
         $this->valueRepository = ValueRepository::newInstance();
+        $this->writer = new CsvWriter();
     }
 
     private function buildValues()
@@ -46,6 +48,11 @@ class Checker
         return $this->valueRepository->getByType($type);
     }
 
+    private function write($operator, $parameters, $result)
+    {
+        return $this->writer->write($operator, $parameters, $result);
+    }
+
     private function applyToValues(Operator $operator, array $values)
     {
         $args = array_map(function ($v) { return $v(); }, $values);
@@ -58,12 +65,7 @@ class Checker
         $setOfValues = array_map(function ($t) { return $this->getValuesByType($t); }, $types);
         foreach (ArrayUtil::cartesianProduct($setOfValues) as $values) {
             $retval = $this->applyToValues($operator, $values);
-
-            $opSymbol = $operator->getSymbol();
-            list ($v1, $v2) = $values;
-            $lhs = $v1->getType() . '.' . $v1->getName();
-            $rhs = $v2->getType() . '.' . $v2->getName();
-            echo "$lhs $opSymbol $rhs : " . $retval() . "\n";
+            $this->write($operator, $values, $retval);
         }
     }
 
